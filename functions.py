@@ -55,7 +55,7 @@ def overlay_image_alpha(img, overlay, x, y):
     return img
 
 
-def process_video(bkg_vid_path, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path):
+def process_video(bkg_vid_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path):
 
     import os
     cwd = os.getcwd()
@@ -77,10 +77,6 @@ def process_video(bkg_vid_path, qr_code, logo1, logo1_txt, logo2, logo2_txt, log
     logo2 = cv2.imread(logo2, cv2.IMREAD_UNCHANGED)
     logo3 = cv2.imread(logo3, cv2.IMREAD_UNCHANGED)
     upper_image = cv2.imread(f"{cwd}/images/img.png", cv2.IMREAD_UNCHANGED)
-    # qr_code = cv2.imread(f"{cwd}/images/qr_code.png", cv2.IMREAD_UNCHANGED)
-    # logo1 = cv2.imread(f"{cwd}/images/logo.png", cv2.IMREAD_UNCHANGED)
-    # logo2 = cv2.imread(f"{cwd}/images/logo.png", cv2.IMREAD_UNCHANGED)
-    # logo3 = cv2.imread(f"{cwd}/images/logo3.png", cv2.IMREAD_UNCHANGED)
     # Define the text to display above each logo
     texts = [logo1_txt, logo2_txt, logo3_txt]
 
