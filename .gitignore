@@ -1,0 +1,7 @@
+# Ignore media files
+media/videos
+*.mp4
+*.avi
+*.mov
+*.mkv
+.idea
