@@ -10,7 +10,6 @@ app = Flask(__name__)
 # Define media storage path
 # MEDIA_FOLDER = os.path.join(os.getcwd(), "media", "videos")
 MEDIA_FOLDER = os.path.expanduser("~/media/videos")
-# IMAGES_FOLDER = os.path.expanduser("~/video_builder/images")
 os.makedirs(MEDIA_FOLDER, exist_ok=True)  # Ensure media folder exists
 
 @app.route('/')
@@ -41,13 +40,6 @@ def process():
     logo2_txt = data.get('logo2_txt')
     logo3_txt = data.get('logo3_txt')
     top_img = f"~/video_builder/images/img.png"
-    # qr_code = os.path.join(MEDIA_FOLDER,"qr_code.png")
-    # logo1 = os.path.join(MEDIA_FOLDER,"logo")
-    # logo2 = os.path.join(MEDIA_FOLDER,"logo3")
-    # logo3 = os.path.join(MEDIA_FOLDER,"logo")
-    # logo1_txt = 'logo1_txt'
-    # logo2_txt = 'logo2_txt'
-    # logo3_txt = 'logo3_txt'
     output_path = process_video(video_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path)
     output_filename = os.path.basename(output_path)
 
