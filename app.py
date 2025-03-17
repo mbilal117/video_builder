@@ -1,7 +1,7 @@
 import os
 
 import requests
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory, send_file
 
 from functions import download_file, process_video
 
@@ -57,7 +57,9 @@ def process():
 @app.route('/media/videos/<filename>')
 def serve_media(filename):
     """Serve processed videos from the media folder."""
-    return send_from_directory(MEDIA_FOLDER, filename)
+    # return send_from_directory(MEDIA_FOLDER, filename)
+    file_path = os.path.join(MEDIA_FOLDER, filename)
+    return send_file(file_path, mimetype="video/mp4", as_attachment=False)
 
 if __name__ == '__main__':
     app.run()
