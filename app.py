@@ -20,7 +20,11 @@ def hello_world():  # put application's code here
 @app.route('/process-video', methods=['POST'])
 def process():
     data = request.get_json()
-
+    # Endpoint_URL = "https://www.dwellaverse.com/wp-json/python-deploy/video/"
+    # headers = {"x-api-key": "51ed01d9-1dae-4117-927f-b825524b3fe5"}
+    #
+    # res = requests.get(Endpoint_URL, headers=headers)
+    # data = res.json()['data']
     # Load video
     output_path = os.path.join(MEDIA_FOLDER, f"{data.get('uid')}.mp4")  # Store in media folder
 
@@ -40,7 +44,12 @@ def process():
     logo2_txt = data.get('logo2_txt')
     logo3_txt = data.get('logo3_txt')
     top_img = f"~/video_builder/images/img.png"
-    output_path = process_video(video_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path)
+    property_adrs = data.get('property_address')
+    zip_code = data.get('zip_code')
+    city = data.get('city')
+    state = data.get('state')
+    county = data.get('county')
+    output_path = process_video(video_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path, property_adrs, zip_code, city, state, county)
     output_filename = os.path.basename(output_path)
 
     return jsonify({"download_url": f"/media/videos/{output_filename}"}), 200

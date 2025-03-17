@@ -5,8 +5,6 @@ import requests
 import numpy as np
 
 
-
-
 def download_file(url):
     """Download file from url and save it temporarily"""
     response = requests.get(url, stream=True)
@@ -55,7 +53,7 @@ def overlay_image_alpha(img, overlay, x, y):
     return img
 
 
-def process_video(bkg_vid_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path):
+def process_video(bkg_vid_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path, property_adrs, zip_code, city, state, county):
 
     import os
     cwd = os.getcwd()
@@ -79,7 +77,7 @@ def process_video(bkg_vid_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2
     upper_image = cv2.imread(f"{cwd}/images/img.png", cv2.IMREAD_UNCHANGED)
     # Define the text to display above each logo
     texts = [logo1_txt, logo2_txt, logo3_txt]
-
+    address = [property_adrs, zip_code, city, state, county]
 
 
     # Resize upper image to fit inside the frame with 25% margins
@@ -120,6 +118,7 @@ def process_video(bkg_vid_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2
     ## Determine the merging point (Bottom of Upper Image)
     qr_y = upper_y + upper_height - 20  # Bottom edge of the upper image
     qr_x = upper_x  # Center horizontally
+    address_y = qr_y + 120  # Below QR code
 
     # Font settings
     font = cv2.FONT_HERSHEY_SIMPLEX
@@ -138,6 +137,11 @@ def process_video(bkg_vid_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2
 
         # Overlay QR Code
         frame = overlay_image_alpha(frame, qr_code, qr_x, qr_y)
+
+        # Add Address Below QR Code
+        frame = cv2.putText(frame, property_adrs, (qr_x, address_y ), font, frame_width / 800, font_color, thickness+1)
+        for i, address_line in enumerate(address[1:]):
+            frame = cv2.putText(frame, address_line, (qr_x, address_y +20+ (i * 10)), font, font_scale, font_color, thickness)
 
         # Overlay logos
         logos = [logo1_resized, logo2_resized, logo3_resized]
