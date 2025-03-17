@@ -59,7 +59,7 @@ def serve_media(filename):
     """Serve processed videos from the media folder."""
     # return send_from_directory(MEDIA_FOLDER, filename)
     file_path = os.path.join(MEDIA_FOLDER, filename)
-    return send_file(file_path, mimetype="video/mp4", as_attachment=False)
+    return send_file(file_path, mimetype="video/mp4")
 
 if __name__ == '__main__':
     app.run()
