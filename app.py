@@ -10,6 +10,7 @@ app = Flask(__name__)
 # Define media storage path
 # MEDIA_FOLDER = os.path.join(os.getcwd(), "media", "videos")
 MEDIA_FOLDER = os.path.expanduser("~/media/videos")
+IMAGES_FOLDER = os.path.expanduser("~/video_builder/images")
 os.makedirs(MEDIA_FOLDER, exist_ok=True)  # Ensure media folder exists
 
 @app.route('/')
@@ -28,8 +29,8 @@ def process():
     if not vid_url:
         return jsonify({'error': 'Missing vid_url'})
 
-    video_path = f"~/video_builder/images/bg-change-final-video.mp4"
-    # video_path = download_file(f"~/video_builder/images/bg-change-final-video.mp4")
+    video_path = os.path.join(MEDIA_FOLDER,"bg-change-final-video.mp4")
+    # video_path = download_file(vid_url)
     if not video_path:
         return jsonify({'error': 'Failed to download video'}), 400
     # qr_code = download_file(data.get('qr_code'))
@@ -39,11 +40,11 @@ def process():
     # logo1_txt = data.get('logo1_txt')
     # logo2_txt = data.get('logo2_txt')
     # logo3_txt = data.get('logo3_txt')
-    top_img = f"~/video_builder/images/img.png"
-    qr_code = f"~/video_builder/images/qr_code.png"
-    logo1 = f"~/video_builder/images/logo"
-    logo2 = f"~/video_builder/images/logo3"
-    logo3 = f"~/video_builder/images/logo"
+    top_img = os.path.join(MEDIA_FOLDER,"img.png")
+    qr_code = os.path.join(MEDIA_FOLDER,"qr_code.png")
+    logo1 = os.path.join(MEDIA_FOLDER,"logo")
+    logo2 = os.path.join(MEDIA_FOLDER,"logo3")
+    logo3 = os.path.join(MEDIA_FOLDER,"logo")
     logo1_txt = 'logo1_txt'
     logo2_txt = 'logo2_txt'
     logo3_txt = 'logo3_txt'
