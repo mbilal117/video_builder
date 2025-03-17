@@ -28,7 +28,7 @@ def process():
     if not vid_url:
         return jsonify({'error': 'Missing vid_url'})
 
-    video_path = download_file(f"/home/anbilal/video_builder/images/bg-change-final-video.mp4")
+    video_path = download_file(f"~/video_builder/images/bg-change-final-video.mp4")
     if not video_path:
         return jsonify({'error': 'Failed to download video'}), 400
     # qr_code = download_file(data.get('qr_code'))
@@ -38,11 +38,11 @@ def process():
     # logo1_txt = data.get('logo1_txt')
     # logo2_txt = data.get('logo2_txt')
     # logo3_txt = data.get('logo3_txt')
-    top_img = f"/home/anbilal/video_builder/images/img.png"
-    qr_code = f"/home/anbilal/video_builder/images/qr_code.png"
-    logo1 = f"/home/anbilal/video_builder/images/logo"
-    logo2 = f"/home/anbilal/video_builder/images/logo3"
-    logo3 = f"/home/anbilal/video_builder/images/logo"
+    top_img = f"~/video_builder/images/img.png"
+    qr_code = f"~/video_builder/images/qr_code.png"
+    logo1 = f"~/video_builder/images/logo"
+    logo2 = f"~/video_builder/images/logo3"
+    logo3 = f"~/video_builder/images/logo"
     logo1_txt = 'logo1_txt'
     logo2_txt = 'logo2_txt'
     logo3_txt = 'logo3_txt'
