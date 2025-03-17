@@ -28,7 +28,8 @@ def process():
     if not vid_url:
         return jsonify({'error': 'Missing vid_url'})
 
-    video_path = download_file(f"~/video_builder/images/bg-change-final-video.mp4")
+    video_path = f"~/video_builder/images/bg-change-final-video.mp4"
+    # video_path = download_file(f"~/video_builder/images/bg-change-final-video.mp4")
     if not video_path:
         return jsonify({'error': 'Failed to download video'}), 400
     # qr_code = download_file(data.get('qr_code'))
