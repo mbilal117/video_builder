@@ -20,11 +20,6 @@ def hello_world():  # put application's code here
 @app.route('/process-video', methods=['POST'])
 def process():
     data = request.get_json()
-    # Endpoint_URL = "https://www.dwellaverse.com/wp-json/python-deploy/video/"
-    # headers = {"x-api-key": "51ed01d9-1dae-4117-927f-b825524b3fe5"}
-    #
-    # res = requests.get(Endpoint_URL, headers=headers)
-    # data = res.json()['data']
     # Load video
     output_path = os.path.join(MEDIA_FOLDER, f"{data.get('uid')}.mp4")  # Store in media folder
 
