@@ -8,8 +8,8 @@ from functions import download_file, process_video
 app = Flask(__name__)
 
 # Define media storage path
-# MEDIA_FOLDER = os.path.join(os.getcwd(), "media", "videos")
-MEDIA_FOLDER = os.path.expanduser("~/media/videos")
+MEDIA_FOLDER = os.path.join(os.getcwd(), "media", "videos")
+# MEDIA_FOLDER = os.path.expanduser("~/media/videos")
 os.makedirs(MEDIA_FOLDER, exist_ok=True)  # Ensure media folder exists
 
 @app.route('/')
