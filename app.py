@@ -8,8 +8,8 @@ from functions import download_file, process_video
 app = Flask(__name__)
 
 # Define media storage path
-# MEDIA_FOLDER = os.path.join(os.getcwd(), "media", "videos")
-MEDIA_FOLDER = os.path.expanduser("~/media/videos")
+MEDIA_FOLDER = os.path.join(os.getcwd(), "media", "videos")
+# MEDIA_FOLDER = os.path.expanduser("~/media/videos")
 os.makedirs(MEDIA_FOLDER, exist_ok=True)  # Ensure media folder exists
 
 @app.route('/')
@@ -29,22 +29,29 @@ def process():
 
     # video_path = os.path.join(MEDIA_FOLDER,"bg-change-final-video.mp4")
     video_path = download_file(vid_url)
+    # video_path = vid_url
     if not video_path:
         return jsonify({'error': 'Failed to download video'}), 400
-    qr_code = download_file(data.get('qr_code'))
-    logo1 = download_file(data.get('logo1'))
-    logo2 = download_file(data.get('logo2'))
-    logo3 = download_file(data.get('logo3'))
-    logo1_txt = data.get('logo1_txt')
-    logo2_txt = data.get('logo2_txt')
-    logo3_txt = data.get('logo3_txt')
-    top_img = f"~/video_builder/images/img.png"
-    property_adrs = data.get('property_address')
-    zip_code = data.get('zip_code')
-    city = data.get('city')
-    state = data.get('state')
-    county = data.get('county')
-    output_path = process_video(video_path, top_img, qr_code, logo1, logo1_txt, logo2, logo2_txt, logo3, logo3_txt, output_path, property_adrs, zip_code, city, state, county)
+
+    params = {
+        "bkg_vid_path": video_path,
+        "qr_code" : download_file(data.get('qr_code')),
+        "logo1" : download_file(data.get('logo1')),
+        "logo2" : download_file(data.get('logo2')),
+        "logo3" : download_file(data.get('logo1')),
+        "logo1_txt" : data.get('logo1_txt'),
+        "logo2_txt" : data.get('logo2_txt'),
+        "logo3_txt" : data.get('logo3_txt'),
+        "top_img" : data.get('top_img'),
+        "property_adrs" : data.get('property_address'),
+        "zip_code" : data.get('zip_code'),
+        "city" : data.get('city'),
+        "state" : data.get('state'),
+        "county" : data.get('county'),
+        "output_path" : output_path
+    }
+
+    output_path = process_video(params)
     output_filename = os.path.basename(output_path)
 
     return jsonify({"download_url": f"/media/videos/{output_filename}"}), 200
