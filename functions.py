@@ -5,8 +5,8 @@ import requests
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-
-fonts_dir = os.path.join(os.getcwd(), 'fonts')
+cwd = os.getcwd()
+fonts_dir = os.path.join(cwd, 'fonts')
 font_path_inter_bold = os.path.join(fonts_dir, 'Inter_24pt-Black.ttf')
 font_path_plus_jakarta = os.path.join(fonts_dir, 'PlusJakartaSans-Bold.ttf')
 
@@ -127,7 +127,8 @@ def process_video(params):
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         out = cv2.VideoWriter(params["output_path"], fourcc, fps, (frame_width, frame_height))
 
-        upper_image = cv2.imread(params["top_img"], cv2.IMREAD_UNCHANGED)
+        upper_image = cv2.imread(f"{cwd}/images/img.png", cv2.IMREAD_UNCHANGED)
+        # upper_image = cv2.imread(params["top_img"], cv2.IMREAD_UNCHANGED)
         qr_code = cv2.imread(params["qr_code"], cv2.IMREAD_UNCHANGED)
         logo1 = cv2.imread(params["logo1"], cv2.IMREAD_UNCHANGED)
         logo2 = cv2.imread(params["logo2"], cv2.IMREAD_UNCHANGED)
